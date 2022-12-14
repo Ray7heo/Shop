@@ -31,4 +31,11 @@ public class CartItemService {
         CartItemMapper cartItemMapper = sqlSession.getMapper(CartItemMapper.class);
         return cartItemMapper.getCartItemByUid(uid);
     }
+
+    public void delCartItemById(int id) throws IOException {
+        SqlSession sqlSession = DBUtil.getSqlSession();
+        CartItemMapper cartItemMapper = sqlSession.getMapper(CartItemMapper.class);
+        cartItemMapper.delCartItemById(id);
+        sqlSession.commit();
+    }
 }

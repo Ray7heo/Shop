@@ -38,7 +38,7 @@
         </div>
     </nav>
 
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -46,6 +46,7 @@
             <th scope="col">商品图片</th>
             <th scope="col">价格</th>
             <th scope="col">数量</th>
+            <th scope="col">总金额</th>
             <th scope="col">操作</th>
         </tr>
         </thead>
@@ -60,7 +61,11 @@
                     </td>
                     <td>${item.goods.price}</td>
                     <td>${item.amount}</td>
-                    <td>操作</td>
+                    <td>${item.goods.price*item.amount}</td>
+                    <td>
+                        <a type="button" class="btn btn-primary">修改</a>
+                        <a type="button" class="btn btn-danger" href="delCartItemServlet?cid=${item.id}">删除</a>
+                    </td>
                 </tr>
             </c:forEach>
         </c:if>

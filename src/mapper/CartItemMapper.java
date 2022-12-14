@@ -24,4 +24,6 @@ public interface CartItemMapper {
     })
     List<CartItem> getCartItemByUid(int uid);
 
+    @Delete("delete from cart_item where id = #{id}")
+    void delCartItemById(int id);
 }
