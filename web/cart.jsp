@@ -13,6 +13,28 @@
     <title>我的购物车</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script>
+        function updateCartItem(id) {
+            let amount = $("#amount" + id).val();
+            $.post("updateCartItemServlet", {
+                itemId: id,
+                amount: amount
+            }, function (data, status) {
+                alert("修改成功")
+                location.reload()
+            });
+        }
+
+        function delCartItem(id) {
+            $.post("delCartItemServlet", {
+                cid: id
+            }, function (data, status) {
+                alert("删除成功")
+                location.reload()
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -54,17 +76,22 @@
         <c:if test="${cartItems!=null}">
             <c:forEach items="${cartItems}" var="item" varStatus="status">
                 <tr>
-                    <th scope="row">${status.index + 1}</th>
+                    <th scope="row">${status.index+1}</th>
                     <td>${item.goods.name}</td>
                     <td>
                         <img src="${item.goods.image1}" class="img-thumbnail" width="150" height="150">
                     </td>
                     <td>${item.goods.price}</td>
-                    <td>${item.amount}</td>
+                    <td>
+                        <div class="form-group mx-sm-2 mb-2">
+                            <input type="number" class="form-control" id="amount${item.id}"
+                                   value="${item.amount}" min="1" name="amount">
+                        </div>
+                    </td>
                     <td>${item.goods.price*item.amount}</td>
                     <td>
-                        <a type="button" class="btn btn-primary">修改</a>
-                        <a type="button" class="btn btn-danger" href="delCartItemServlet?cid=${item.id}">删除</a>
+                        <a type="button" class="btn btn-primary" onclick="updateCartItem(${item.id})">修改</a>
+                        <a type="button" class="btn btn-danger" onclick="delCartItem(${item.id})">删除</a>
                     </td>
                 </tr>
             </c:forEach>

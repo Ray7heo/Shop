@@ -26,4 +26,7 @@ public interface CartItemMapper {
 
     @Delete("delete from cart_item where id = #{id}")
     void delCartItemById(int id);
+
+    @Update("update cart_item set amount = #{amount} where id = #{id}")
+    void updateCartItemAmount(@Param("id") int id, @Param("amount") int amount);
 }

@@ -23,6 +23,7 @@ public class CartItemService {
             cartItemMapper.updateItem(id, goodsId);
         }
         sqlSession.commit();
+        sqlSession.close();
         return "succeed";
     }
 
@@ -37,5 +38,14 @@ public class CartItemService {
         CartItemMapper cartItemMapper = sqlSession.getMapper(CartItemMapper.class);
         cartItemMapper.delCartItemById(id);
         sqlSession.commit();
+        sqlSession.close();
+    }
+
+    public void updateCartItem(int id, int amount) throws IOException {
+        SqlSession sqlSession = DBUtil.getSqlSession();
+        CartItemMapper cartItemMapper = sqlSession.getMapper(CartItemMapper.class);
+        cartItemMapper.updateCartItemAmount(id, amount);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }
