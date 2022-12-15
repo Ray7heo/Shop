@@ -17,7 +17,6 @@
 
     <script>
         function addCart(userId, goodsId) {
-            //!!!以下代码不会执行
             $.post("addCartServlet", {
                 userId: userId,
                 goodsId: goodsId
