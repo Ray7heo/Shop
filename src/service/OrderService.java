@@ -1,5 +1,6 @@
 package service;
 
+import mapper.OrderItemMapper;
 import mapper.OrderMapper;
 import org.apache.ibatis.session.SqlSession;
 import po.Order;
@@ -29,5 +30,13 @@ public class OrderService {
         SqlSession sqlSession = DBUtil.getSqlSession();
         OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
         return orderMapper.getOrderByUid(uid);
+    }
+
+    public void updateOrder(int id, int status, int paytype) throws IOException {
+        SqlSession sqlSession = DBUtil.getSqlSession();
+        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+        orderMapper.updateOrder(id, status, paytype);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }

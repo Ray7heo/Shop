@@ -3,6 +3,7 @@ package mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import po.Order;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface OrderMapper {
 
     @Select("select * from tb_order where user_id = #{uid}")
     List<Order> getOrderByUid(int uid);
+
+    @Update("update tb_order set status=#{status},paytype=#{paytype} where id=#{id}")
+    void updateOrder(@Param("id") int id, @Param("status") int status, @Param("paytype") int paytype);
 }

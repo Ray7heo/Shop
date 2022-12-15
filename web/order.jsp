@@ -15,6 +15,22 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery-3.6.1.min.js"></script>
+    <script>
+        function updateOrder(id) {
+
+            let status = $("#status" + id + " option:selected").val()
+            let paytype = $("#pay" + id + " option:selected").val()
+            $.post("updateOrderServlet", {
+                id: id,
+                status: status,
+                paytype: paytype
+            }, function (data, status) {
+                alert("修改成功")
+            })
+        }
+
+
+    </script>
 </head>
 <body>
 <div class="container">
