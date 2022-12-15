@@ -115,8 +115,6 @@
                             <c:if test="${item.status!=3}">
                                 <option value="3">银联</option>
                             </c:if>
-
-
                         </select>
                     </td>
                     <td>
