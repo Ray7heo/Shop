@@ -34,6 +34,24 @@
                 location.reload()
             });
         }
+
+        function submitOrder() {
+            if ($(":checked").length === 0) {
+                alert("请选择购物车中的项目!!!")
+                return
+            }
+            let checked = ''
+            for (let i = 0; i < $(":checked").length; i++) {
+                checked += $(":checked")[i].value + ","
+            }
+            checked = checked.substring(0, checked.length - 1)
+            $.post("addOrderServlet", {
+                checked: checked
+            }, function (data, status) {
+                alert(data)
+                location.reload()
+            })
+        }
     </script>
 </head>
 <body>
@@ -76,7 +94,12 @@
         <c:if test="${cartItems!=null}">
             <c:forEach items="${cartItems}" var="item" varStatus="status">
                 <tr>
-                    <th scope="row">${status.index+1}</th>
+                    <th scope="row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="${item.id}" id=${item.id}>
+                            <label class="form-check-label" for="${item.id}">${status.index+1}</label>
+                        </div>
+                    </th>
                     <td>${item.goods.name}</td>
                     <td>
                         <img src="${item.goods.image1}" class="img-thumbnail" width="150" height="150">
@@ -99,6 +122,10 @@
 
         </tbody>
     </table>
+    <div class="text-right">
+        <button class="btn btn-outline-success" type="button" onclick="submitOrder()">提交</button>
+    </div>
+
 </div>
 </body>
 </html>

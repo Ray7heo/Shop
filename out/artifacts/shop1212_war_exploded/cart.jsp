@@ -28,11 +28,29 @@
 
         function delCartItem(id) {
             $.post("delCartItemServlet", {
-                cid: id,
+                cid: id
             }, function (data, status) {
                 alert("删除成功")
                 location.reload()
             });
+        }
+
+        function submitOrder() {
+            if ($(":checked").length === 0) {
+                alert("请选择购物车中的项目!!!")
+                return
+            }
+            let checked = ''
+            for (let i = 0; i < $(":checked").length; i++) {
+                checked += $(":checked")[i].value + ","
+            }
+            checked = checked.substring(0, checked.length - 1)
+            $.post("addOrderServlet", {
+                checked: checked
+            }, function (data, status) {
+                alert(data)
+                location.reload()
+            })
         }
     </script>
 </head>
@@ -76,14 +94,19 @@
         <c:if test="${cartItems!=null}">
             <c:forEach items="${cartItems}" var="item" varStatus="status">
                 <tr>
-                    <th scope="row">${status.index+1}</th>
+                    <th scope="row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="${item.id}" id=${item.id}>
+                            <label class="form-check-label" for="${item.id}">${status.index+1}</label>
+                        </div>
+                    </th>
                     <td>${item.goods.name}</td>
                     <td>
                         <img src="${item.goods.image1}" class="img-thumbnail" width="150" height="150">
                     </td>
                     <td>${item.goods.price}</td>
                     <td>
-                        <div class="form-group mx-sm-3 mb-2">
+                        <div class="form-group mx-sm-2 mb-2">
                             <input type="number" class="form-control" id="amount${item.id}"
                                    value="${item.amount}" min="1" name="amount">
                         </div>
@@ -99,6 +122,10 @@
 
         </tbody>
     </table>
+    <div class="text-right">
+        <button class="btn btn-outline-success" type="button" onclick="submitOrder()">提交</button>
+    </div>
+
 </div>
 </body>
 </html>
