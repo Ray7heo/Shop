@@ -9,7 +9,7 @@ public class Order {
     private int amount;
     private int status;
     private int paytype;
-    private Date orderTime;
+    private java.util.Date order_time;
 
     public int getId() {
         return id;
@@ -59,11 +59,11 @@ public class Order {
         this.paytype = paytype;
     }
 
-    public Date getOrderTime() {
-        return orderTime;
+    public void setOrder_time(Date order_time) {
+        this.order_time = order_time;
     }
 
-    public void setOrderTime(Date orderTime) {
-        this.orderTime = orderTime;
+    public Date getOrder_time() {
+        return order_time;
     }
 }

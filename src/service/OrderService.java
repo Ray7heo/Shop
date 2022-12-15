@@ -6,6 +6,7 @@ import po.Order;
 import utils.DBUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 public class OrderService {
 
@@ -22,5 +23,11 @@ public class OrderService {
         OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
         return orderMapper.getOrderByTime();
 
+    }
+
+    public List<Order> getOrderByUid(int uid) throws IOException {
+        SqlSession sqlSession = DBUtil.getSqlSession();
+        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+        return orderMapper.getOrderByUid(uid);
     }
 }

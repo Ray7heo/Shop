@@ -35,7 +35,7 @@
                     <a class="nav-link" href="index.jsp">首页 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">我的订单</a>
+                    <a class="nav-link" href="showOrderServlet?uid=${user.id}">我的订单</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="showCartServlet?uid=${user.id}">我的购物车</a>
