@@ -28,8 +28,6 @@
                 alert("修改成功")
             })
         }
-
-
     </script>
 </head>
 <body>
@@ -138,7 +136,7 @@
                     </td>
                     <td>
                         <a type="button" class="btn btn-primary" onclick="updateOrder(${item.id})">修改订单</a>
-                        <a type="button" class="btn btn-danger" onclick="showOrderItem(${item.id})">订单详情</a>
+                        <a type="button" class="btn btn-danger" href="orderDetailServlet?id=${item.id}">订单详情</a>
                     </td>
                 </tr>
             </c:forEach>
